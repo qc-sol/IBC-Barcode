@@ -479,6 +479,10 @@
       }
     });
 
+    // 추가 버튼 이벤트
+    document.getElementById("add-ibc-btn").onclick = () => createItem("IBC");
+    document.getElementById("add-normal-btn").onclick = () => createItem("NORMAL");
+
     // 초기 세팅 (바코드 아이템은 만들지 않고 버튼만 보이게)
     updateTitles();
   </script>
