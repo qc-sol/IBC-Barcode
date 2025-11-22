@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>IBC 바코드 생성기</title>
+  <title>IBC 바코드 생성기 (PC)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <style>
@@ -15,20 +15,11 @@
     body {
       margin: 0;
       background: #f4f4f5;
-    }
-
-    /* 데스크톱 / 모바일 뷰 전환용 */
-    body[data-view="desktop"] {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
-    }
-
-    body[data-view="mobile"] {
-      display: block;
-      padding: 12px;
+      padding: 0 12px;
     }
 
     .wrapper {
@@ -38,14 +29,6 @@
       max-width: 640px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.10);
       padding: 18px;
-    }
-
-    body[data-view="desktop"] .wrapper {
-      margin: 0 16px;
-    }
-
-    body[data-view="mobile"] .wrapper {
-      margin: 0;
     }
 
     h1 {
@@ -121,7 +104,7 @@
     .action-btn {
       width: 100%;
       padding: 10px;
-      background: #1f2937; /* IBC 버튼보다 살짝 더 어두운 톤 */
+      background: #1f2937;
       color: #fff;
       border: none;
       border-radius: 10px;
@@ -175,7 +158,7 @@
 
 <body data-view="desktop">
   <div class="wrapper">
-    <h1>IBC 바코드 생성기</h1>
+    <h1 id="page-title">IBC 바코드 생성기 (PC)</h1>
     <p class="subtitle">CFS INC39 QC Sol</p>
 
     <div id="items-container"></div>
@@ -269,7 +252,6 @@
 
       codeInput.addEventListener("input", () => generate(box));
 
-      // 공통 버튼 핸들러: 모드에 따라 동작 분기
       actionBtn.addEventListener("click", () => {
         const mode = getViewMode();
         if (mode === "desktop") {
@@ -345,7 +327,6 @@
       });
     }
 
-    // 모바일 모드: PNG 다운로드
     function downloadPNG(item) {
       const svgEl = item.querySelector(".barcode-svg");
       const vendor = item.querySelector(".vendor-input").value.trim() || "vendor";
@@ -369,7 +350,6 @@
         });
     }
 
-    // PC 모드: 클립보드 복사
     function copyToClipboard(item) {
       const svgEl = item.querySelector(".barcode-svg");
       const vendor = item.querySelector(".vendor-input").value.trim() || "vendor";
@@ -391,8 +371,8 @@
               alert("이미지 생성에 실패했습니다.");
               return;
             }
-            const item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard.write([item])
+            const clipItem = new ClipboardItem({ "image/png": blob });
+            navigator.clipboard.write([clipItem])
               .then(() => {
                 alert("이미지가 클립보드에 복사되었습니다.");
               })
@@ -406,7 +386,6 @@
         });
     }
 
-    // 뷰 토글 버튼 레이블 & 동작
     const viewToggleBtn = document.getElementById("view-toggle-btn");
 
     function updateActionButtonLabel(item) {
@@ -427,19 +406,31 @@
         mode === "desktop" ? "모바일로 보기" : "PC로 보기";
     }
 
+    function updateTitles() {
+      const mode = getViewMode();
+      const titleText = mode === "desktop"
+        ? "IBC 바코드 생성기 (PC)"
+        : "IBC 바코드 생성기 (모바일)";
+      const h1 = document.getElementById("page-title");
+      if (h1) h1.textContent = titleText;
+      document.title = titleText;
+    }
+
     viewToggleBtn.addEventListener("click", () => {
       const current = getViewMode();
       const next = current === "desktop" ? "mobile" : "desktop";
       document.body.setAttribute("data-view", next);
       updateViewToggleLabel();
       updateAllActionButtons();
+      updateTitles();
     });
 
     document.getElementById("add-ibc-btn").onclick = () => createItem("IBC");
     document.getElementById("add-normal-btn").onclick = () => createItem("NORMAL");
 
-    // 초기 상태: 데스크톱 뷰 + 바코드 하나 생성
+    // 초기 상태 세팅
     updateViewToggleLabel();
+    updateTitles();
     createItem("IBC");
   </script>
 </body>
