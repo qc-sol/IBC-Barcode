@@ -3,154 +3,25 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>IBC 바코드 생성기 (PC)</title>
+  <title>IBC 바코드 생성기</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: #f4f4f5;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 12px;
-    }
-
-    .wrapper {
-      background: #ffffff;
-      border-radius: 14px;
-      width: 100%;
-      max-width: 640px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
-      padding: 18px;
-    }
-
-    h1 {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0 0 4px;
-    }
-
-    .subtitle {
-      font-size: 12px;
-      color: #6b7280;
-      margin: 0 0 16px;
-    }
-
-    label {
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      display: block;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #d1d5db;
-      margin-bottom: 10px;
-      font-size: 14px;
-      background: #ffffff;
-    }
-
-    .barcode-item {
-      background: #f9fafb;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-      margin-bottom: 16px;
-    }
-
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      align-items: center;
-    }
-
-    .item-title {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .delete-btn {
-      background: #dc2626;
-      color: #fff;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .barcode-box {
-      margin-top: 10px;
-      border: 1px dashed #d1d5db;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      background: #fff;
-      min-height: 90px;
-    }
-
-    .action-btn {
-      width: 100%;
-      padding: 10px;
-      background: #1f2937;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .add-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .add-buttons button {
-      flex: 1;
-      padding: 12px;
-      background: #4b5563;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .view-toggle-wrapper {
-      margin-top: 14px;
-      text-align: right;
-    }
-
-    .view-toggle-btn {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: none;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .view-toggle-btn span {
-      font-weight: 700;
-    }
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin:0; background:#f4f4f5; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:0 12px; }
+    .wrapper { background:#fff; border-radius:14px; width:100%; max-width:640px; box-shadow:0 6px 18px rgba(0,0,0,0.10); padding:18px; }
+    h1 { font-size:20px; font-weight:700; margin:0 0 4px; }
+    .subtitle { font-size:12px; color:#6b7280; margin:0 0 16px; }
+    .barcode-item { background:#f9fafb; padding:14px; border-radius:12px; border:1px solid #e5e7eb; margin-bottom:16px; }
+    label { font-size:12px; font-weight:600; margin-bottom:4px; display:block; }
+    input, select { width:100%; padding:10px; border-radius:10px; border:1px solid #d1d5db; margin-bottom:10px; font-size:14px; }
+    .delete-btn { background:#dc2626; color:#fff; border:none; padding:4px 10px; border-radius:6px; font-size:11px; cursor:pointer; }
+    .barcode-box { margin-top:10px; border:1px dashed #d1d5db; padding:10px; border-radius:10px; display:flex; justify-content:center; background:#fff; min-height:90px; }
+    .action-btn { width:100%; padding:10px; background:#1f2937; color:#fff; border:none; border-radius:10px; margin-top:10px; font-size:14px; font-weight:600; cursor:pointer; }
+    .add-buttons { display:flex; gap:10px; margin-top:20px; }
+    .add-buttons button { flex:1; padding:12px; background:#4b5563; color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; }
+    .view-toggle-wrapper { margin-top:14px; text-align:right; }
+    .view-toggle-btn { padding:8px 14px; border-radius:999px; border:none; background:#e5e7eb; font-size:12px; font-weight:600; cursor:pointer; }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
@@ -164,14 +35,12 @@
     <div id="items-container"></div>
 
     <div class="add-buttons">
-      <button id="add-ibc-btn">+ IBC 추가</button>
-      <button id="add-normal-btn">+ 일반 추가</button>
+      <button id="add-ibc-btn">+ IBC 바코드 추가</button>
+      <button id="add-normal-btn">+ 일반 바코드 추가</button>
     </div>
 
     <div class="view-toggle-wrapper">
-      <button id="view-toggle-btn" class="view-toggle-btn">
-        <span>모바일로 보기</span>
-      </button>
+      <button id="view-toggle-btn" class="view-toggle-btn"><span>모바일로 보기</span></button>
     </div>
   </div>
 
@@ -185,34 +54,30 @@
       XC: "186-XC25-1-101"
     };
 
-    function getViewMode() {
+    function getViewMode(){
       return document.body.getAttribute("data-view") || "desktop";
     }
 
-    function updatePlaceholder(item) {
-      const type = item.querySelector(".type-select").value;
-      const input = item.querySelector(".code-input");
-
-      if (type === "IBC") input.placeholder = "예: 121801113";
-      else if (type === "NORMAL") input.placeholder = "예: 8809806320808";
-      else if (PRESET[type]) input.placeholder = PRESET[type];
-      else input.placeholder = "";
+    function updateTitles(){
+      const mode = getViewMode();
+      const txt = mode === "desktop" ? "IBC 바코드 생성기 (PC)" : "IBC 바코드 생성기 (모바일)";
+      document.getElementById("page-title").textContent = txt;
+      document.title = txt;
     }
 
-    function createItem(defaultType = "IBC") {
+    function createItem(defaultType="IBC"){
       itemCount++;
-
       const box = document.createElement("div");
       box.className = "barcode-item";
 
       box.innerHTML = `
-        <div class="item-header">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
           <span class="item-title">바코드 #${itemCount}</span>
           <button class="delete-btn">삭제</button>
         </div>
 
-        <label>업체명</label>
-        <input type="text" class="vendor-input" placeholder="예: 바이애플">
+        <label class="label-vendor"></label>
+        <input type="text" class="vendor-input">
 
         <label>바코드 유형 / 내용</label>
         <select class="type-select">
@@ -226,212 +91,132 @@
 
         <input type="text" class="code-input" placeholder="">
 
-        <div class="barcode-box">
-          <svg class="barcode-svg"></svg>
-        </div>
+        <div class="barcode-box"><svg class="barcode-svg"></svg></div>
 
         <button class="action-btn"></button>
       `;
 
-      box.querySelector(".delete-btn").onclick = () => box.remove();
+      const del = box.querySelector(".delete-btn");
+      del.onclick = ()=> box.remove();
 
+      const vendorLabel = box.querySelector(".label-vendor");
+      const vendorInput = box.querySelector(".vendor-input");
       const typeSelect = box.querySelector(".type-select");
       const codeInput = box.querySelector(".code-input");
       const actionBtn = box.querySelector(".action-btn");
 
-      typeSelect.value = defaultType;
-      updatePlaceholder(box);
-
-      typeSelect.addEventListener("change", () => {
-        if (PRESET[typeSelect.value]) {
-          codeInput.value = PRESET[typeSelect.value];
-        }
-        updatePlaceholder(box);
-        generate(box);
-      });
-
-      codeInput.addEventListener("input", () => generate(box));
-
-      actionBtn.addEventListener("click", () => {
-        const mode = getViewMode();
-        if (mode === "desktop") {
-          copyToClipboard(box);
+      function applyLabel(){
+        if(typeSelect.value === "NORMAL"){
+          vendorLabel.textContent = "상품명 / 로케이션";
+          vendorInput.placeholder = "[로켓프레시][과일] 심봉산 사과 1.5kg (소과 / 8~10입)";
         } else {
-          downloadPNG(box);
+          vendorLabel.textContent = "업체명";
+          vendorInput.placeholder = "예: 바이애플";
         }
-      });
+      }
+
+      function updatePlaceholder(){
+        const t = typeSelect.value;
+        if(t==="IBC") codeInput.placeholder = "예: 121801113";
+        else if(t==="NORMAL") codeInput.placeholder = "예: 8809806320808";
+        else if(PRESET[t]) codeInput.placeholder = PRESET[t];
+      }
+
+      function generate(){
+        const svg = box.querySelector(".barcode-svg");
+        const t = typeSelect.value;
+        const txt = codeInput.value.trim();
+        if(!txt){ svg.innerHTML=""; return;}
+        const finalCode = t==="IBC" ? "IBC0"+txt : txt;
+        JsBarcode(svg, finalCode, {format:"code128", width:2, height:80, displayValue:true});
+      }
+
+      async function toCanvas(svgEl, vendor){
+        const xml = new XMLSerializer().serializeToString(svgEl);
+        const blob = new Blob([xml],{type:"image/svg+xml"});
+        const url = URL.createObjectURL(blob);
+        const img = await new Promise((res,rej)=>{
+          const i = new Image();
+          i.onload = ()=> res(i);
+          i.onerror = ()=> rej();
+          i.src = url;
+        });
+        URL.revokeObjectURL(url);
+
+        const vh = vendor? 30:0;
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width + 40;
+        canvas.height = img.height + vh + 40;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle="#fff";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        if(vendor){
+          ctx.fillStyle="#111";
+          ctx.font="20px sans-serif";
+          ctx.textAlign="center";
+          ctx.fillText(vendor, canvas.width/2, 20);
+        }
+        ctx.drawImage(img,20,vh+20);
+        return canvas;
+      }
+
+      async function downloadPNG(){
+        const svg = box.querySelector(".barcode-svg");
+        if(!svg.innerHTML.trim()){ alert("바코드를 입력하세요"); return; }
+        const vendor = vendorInput.value.trim() || "barcode";
+        const canvas = await toCanvas(svg, vendor);
+        canvas.toBlob(b=>{
+          const a=document.createElement("a");
+          a.href=URL.createObjectURL(b);
+          a.download= vendor+"_barcode.png";
+          a.click();
+        });
+      }
+
+      async function copyImage(){
+        const svg = box.querySelector(".barcode-svg");
+        if(!svg.innerHTML.trim()){ alert("바코드를 입력하세요"); return; }
+        const vendor = vendorInput.value.trim() || "barcode";
+        const canvas = await toCanvas(svg, vendor);
+        canvas.toBlob(async b=>{
+          await navigator.clipboard.write([new ClipboardItem({"image/png":b})]);
+          alert("이미지 복사 완료");
+        });
+      }
+
+      typeSelect.value = defaultType;
+      applyLabel();
+      updatePlaceholder();
+
+      typeSelect.onchange = ()=>{ applyLabel(); updatePlaceholder(); if(PRESET[typeSelect.value]) codeInput.value = PRESET[typeSelect.value]; generate(); };
+      codeInput.oninput = generate;
+
+      actionBtn.onclick = ()=> getViewMode()==="desktop" ? copyImage() : downloadPNG();
+      actionBtn.textContent = getViewMode()==="desktop" ? "이미지 복사" : "이미지 저장";
 
       document.getElementById("items-container").appendChild(box);
-      updateActionButtonLabel(box);
     }
 
-    function generate(item) {
-      const type = item.querySelector(".type-select").value;
-      const text = item.querySelector(".code-input").value.trim();
-      const svg = item.querySelector(".barcode-svg");
-
-      if (!text) {
-        svg.innerHTML = "";
-        return;
-      }
-
-      const finalCode = type === "IBC" ? "IBC0" + text : text;
-
-      JsBarcode(svg, finalCode, {
-        format: "code128",
-        width: 2,
-        height: 80,
-        displayValue: true
+    function updateButtons(){
+      document.querySelectorAll(".action-btn").forEach(btn=>{
+        btn.textContent = getViewMode()==="desktop" ? "이미지 복사" : "이미지 저장";
       });
     }
 
-    function ensureSvgReady(svgEl) {
-      return svgEl && svgEl.innerHTML && svgEl.innerHTML.trim().length > 0;
-    }
+    document.getElementById("add-ibc-btn").onclick = ()=> createItem("IBC");
+    document.getElementById("add-normal-btn").onclick = ()=> createItem("NORMAL");
 
-    function buildCanvasFromSvg(svgEl, vendor) {
-      const xml = new XMLSerializer().serializeToString(svgEl);
-      const svgBlob = new Blob([xml], { type: "image/svg+xml" });
-      const url = URL.createObjectURL(svgBlob);
-
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-          const vendorHeight = vendor ? 30 : 0;
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width + 40;
-          canvas.height = img.height + vendorHeight + 40;
-
-          const ctx = canvas.getContext("2d");
-
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          if (vendor) {
-            ctx.fillStyle = "#111827";
-            ctx.font = "20px Apple SD Gothic Neo, system-ui, sans-serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(vendor, canvas.width / 2, 18);
-          }
-
-          ctx.drawImage(img, 20, vendorHeight + 20);
-          URL.revokeObjectURL(url);
-          resolve(canvas);
-        };
-        img.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error("이미지 변환 중 오류가 발생했습니다."));
-        };
-        img.src = url;
-      });
-    }
-
-    function downloadPNG(item) {
-      const svgEl = item.querySelector(".barcode-svg");
-      const vendor = item.querySelector(".vendor-input").value.trim() || "vendor";
-
-      if (!ensureSvgReady(svgEl)) {
-        alert("먼저 바코드를 입력해 주세요.");
-        return;
-      }
-
-      buildCanvasFromSvg(svgEl, vendor)
-        .then(canvas => {
-          canvas.toBlob((blob) => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = vendor + "_barcode.png";
-            link.click();
-          }, "image/png");
-        })
-        .catch(err => {
-          alert(err.message || "이미지 저장 중 오류가 발생했습니다.");
-        });
-    }
-
-    function copyToClipboard(item) {
-      const svgEl = item.querySelector(".barcode-svg");
-      const vendor = item.querySelector(".vendor-input").value.trim() || "vendor";
-
-      if (!ensureSvgReady(svgEl)) {
-        alert("먼저 바코드를 입력해 주세요.");
-        return;
-      }
-
-      if (!("clipboard" in navigator) || typeof ClipboardItem === "undefined") {
-        alert("이미지 복사는 데스크톱 크롬/엣지 최신 버전에서만 지원됩니다.");
-        return;
-      }
-
-      buildCanvasFromSvg(svgEl, vendor)
-        .then(canvas => {
-          canvas.toBlob((blob) => {
-            if (!blob) {
-              alert("이미지 생성에 실패했습니다.");
-              return;
-            }
-            const clipItem = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard.write([clipItem])
-              .then(() => {
-                alert("이미지가 클립보드에 복사되었습니다.");
-              })
-              .catch(err => {
-                alert("복사 중 오류가 발생했습니다: " + err);
-              });
-          }, "image/png");
-        })
-        .catch(err => {
-          alert(err.message || "이미지 복사 중 오류가 발생했습니다.");
-        });
-    }
-
-    const viewToggleBtn = document.getElementById("view-toggle-btn");
-
-    function updateActionButtonLabel(item) {
-      const btn = item.querySelector(".action-btn");
-      if (!btn) return;
-      const mode = getViewMode();
-      btn.textContent = mode === "desktop" ? "이미지 복사" : "이미지 저장";
-    }
-
-    function updateAllActionButtons() {
-      const items = document.querySelectorAll(".barcode-item");
-      items.forEach(updateActionButtonLabel);
-    }
-
-    function updateViewToggleLabel() {
-      const mode = getViewMode();
-      viewToggleBtn.querySelector("span").textContent =
-        mode === "desktop" ? "모바일로 보기" : "PC로 보기";
-    }
-
-    function updateTitles() {
-      const mode = getViewMode();
-      const titleText = mode === "desktop"
-        ? "IBC 바코드 생성기 (PC)"
-        : "IBC 바코드 생성기 (모바일)";
-      const h1 = document.getElementById("page-title");
-      if (h1) h1.textContent = titleText;
-      document.title = titleText;
-    }
-
-    viewToggleBtn.addEventListener("click", () => {
-      const current = getViewMode();
-      const next = current === "desktop" ? "mobile" : "desktop";
+    document.getElementById("view-toggle-btn").onclick = ()=>{
+      const cur = getViewMode();
+      const next = cur==="desktop" ? "mobile" : "desktop";
       document.body.setAttribute("data-view", next);
-      updateViewToggleLabel();
-      updateAllActionButtons();
+      document.querySelector("#view-toggle-btn span").textContent =
+        next==="desktop" ? "모바일로 보기" : "PC로 보기";
       updateTitles();
-    });
+      updateButtons();
+    };
 
-    document.getElementById("add-ibc-btn").onclick = () => createItem("IBC");
-    document.getElementById("add-normal-btn").onclick = () => createItem("NORMAL");
-
-    // 초기 상태 세팅
-    updateViewToggleLabel();
     updateTitles();
-    createItem("IBC");
   </script>
 </body>
 </html>
