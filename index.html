@@ -205,7 +205,8 @@
     let advancedUnlocked = false;
 
     const PRESET = {
-      XP: "186-XP25-1-201",
+      XP_N: "186-XP25-1-201",   // XP(안돈)
+      XP_D: "186-XP25-1-901",   // XP(파괴검품)
       XM: "186-XM0-1-101",
       XX: "186-XX25-1-111",
       XC: "186-XC25-1-101"
@@ -217,7 +218,8 @@
     ];
 
     const ADVANCED_TYPES = [
-      { value: "XP", label: "XP" },
+      { value: "XP_N", label: "XP(안돈)" },
+      { value: "XP_D", label: "XP(파괴검품)" },
       { value: "XC", label: "XC" },
       { value: "XM", label: "XM" },
       { value: "XX", label: "XX" }
@@ -298,7 +300,7 @@
       function applyLabel() {
         if (typeSelect.value === "NORMAL") {
           vendorLabel.textContent = "상품명 / 로케이션";
-          vendorInput.placeholder = "예: [로켓프레시][과일] 심봉산 사과 1.5kg (소과 / 8~10입)";
+          vendorInput.placeholder = "[로켓프레시][과일] 심봉산 사과 1.5kg (소과 / 8~10입)";
         } else {
           vendorLabel.textContent = "업체명";
           vendorInput.placeholder = "예: 바이애플";
@@ -469,8 +471,7 @@
       const code = prompt("인증 코드를 입력하세요.");
       if (code === "3939") {
         advancedUnlocked = true;
-        alert("인증 완료! XP / XC / XM / XX 유형이 활성화되었습니다.");
-        // 기존 셀렉트들에 고급 옵션 추가
+        alert("인증 완료");
         document.querySelectorAll(".type-select").forEach(sel => {
           populateTypeOptions(sel, sel.value);
         });
@@ -483,7 +484,7 @@
     document.getElementById("add-ibc-btn").onclick = () => createItem("IBC");
     document.getElementById("add-normal-btn").onclick = () => createItem("NORMAL");
 
-    // 초기 세팅 (바코드 아이템은 만들지 않고 버튼만 보이게)
+    // 초기 세팅
     updateTitles();
   </script>
 </body>
